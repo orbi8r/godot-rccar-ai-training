@@ -1,39 +1,48 @@
-[gd_scene load_steps=4 format=3 uid="uid://c3aynekcf63lg"]
+[gd_scene load_steps=5 format=3 uid="uid://c3aynekcf63lg"]
 
 [ext_resource type="PackedScene" uid="uid://drdommdpyn04g" path="res://godot-rccar-ai-training/Assets/Models/GLB format/race.tscn" id="1_srga5"]
+[ext_resource type="Script" path="res://godot-rccar-ai-training/Scripts/rc_car.gd" id="1_ycohr"]
 [ext_resource type="PackedScene" uid="uid://dbqssfi4qgjqd" path="res://godot-rccar-ai-training/Assets/Models/GLB format/wheel-racing.glb" id="2_d4rdk"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_q7xfq"]
-size = Vector3(1.3, 0.635, 2.57)
+size = Vector3(1.3, 0.706245, 2.57)
 
 [node name="rc_car" type="VehicleBody3D"]
+mass = 25.0
+script = ExtResource("1_ycohr")
 
 [node name="body" parent="." instance=ExtResource("1_srga5")]
 
 [node name="FLwheel" type="VehicleWheel3D" parent="."]
-transform = Transform3D(0.595, 0, 0, 0, 0.595, 0, 0, 0, 0.595, 0.545, 0.285, 0.63)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.545, 0.285, 0.63)
+use_as_traction = true
+wheel_radius = 0.3
 
 [node name="wheel-racing2" parent="FLwheel" instance=ExtResource("2_d4rdk")]
-transform = Transform3D(1.68067, 0, 0, 0, 1.68067, 0, 0, 0, 1.68067, 0, 0, 0)
 
 [node name="FRwheel" type="VehicleWheel3D" parent="."]
-transform = Transform3D(0.595, 0, 0, 0, 0.595, 0, 0, 0, 0.595, -0.545, 0.285, 0.63)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.545, 0.285, 0.63)
+use_as_traction = true
+wheel_radius = 0.3
 
 [node name="wheel-racing2" parent="FRwheel" instance=ExtResource("2_d4rdk")]
-transform = Transform3D(-1.68067, 0, -1.46929e-07, 0, 1.68067, 0, 1.46929e-07, 0, -1.68067, 0, 0, 0)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="BLwheel" type="VehicleWheel3D" parent="."]
-transform = Transform3D(0.595, 0, 0, 0, 0.595, 0, 0, 0, 0.595, 0.545, 0.285, -0.914513)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.545, 0.285, -0.914513)
+use_as_traction = true
+wheel_radius = 0.3
 
 [node name="wheel-racing2" parent="BLwheel" instance=ExtResource("2_d4rdk")]
-transform = Transform3D(1.68067, 0, 0, 0, 1.68067, 0, 0, 0, 1.68067, 0, 0, 0)
 
 [node name="BRwheel" type="VehicleWheel3D" parent="."]
-transform = Transform3D(0.595, 0, 0, 0, 0.595, 0, 0, 0, 0.595, -0.545, 0.285, -0.915)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.545, 0.285, -0.915)
+use_as_traction = true
+wheel_radius = 0.3
 
 [node name="wheel-racing2" parent="BRwheel" instance=ExtResource("2_d4rdk")]
-transform = Transform3D(-1.68067, 0, -1.46929e-07, 0, 1.68067, 0, 1.46929e-07, 0, -1.68067, 0, 0, 0)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.395, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.356282, 0)
 shape = SubResource("BoxShape3D_q7xfq")

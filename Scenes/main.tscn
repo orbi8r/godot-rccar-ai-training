@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://c8bq2hbp8nub"]
+[gd_scene load_steps=6 format=3 uid="uid://c8bq2hbp8nub"]
 
 [ext_resource type="Texture2D" uid="uid://dq1mysfrrqopj" path="res://godot-rccar-ai-training/Assets/Kenny Prototype Texture/Orange/texture_02.png" id="1_7aou6"]
+[ext_resource type="PackedScene" uid="uid://c3aynekcf63lg" path="res://godot-rccar-ai-training/Scenes/rc_car.tscn" id="2_bcp4r"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_10mx4"]
 
@@ -8,17 +9,26 @@
 albedo_texture = ExtResource("1_7aou6")
 
 [sub_resource type="BoxMesh" id="BoxMesh_rdfjy"]
-size = Vector3(10, 0.1, 10)
+size = Vector3(50, 0.1, 50)
 
 [node name="Main" type="Node3D"]
+
+[node name="rc_car" parent="." instance=ExtResource("2_bcp4r")]
+transform = Transform3D(0.765977, 0, -0.642868, 0, 1, 0, 0.642868, 0, 0.765977, 0.314588, 3.6543, 0.874213)
 
 [node name="Floor" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
-transform = Transform3D(10, 0, 0, 0, 0.1, 0, 0, 0, 10, 0, -0.1, 0)
+transform = Transform3D(50, 0, 0, 0, 0.1, 0, 0, 0, 50, 0, -0.1, 0)
 shape = SubResource("BoxShape3D_10mx4")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
 material_override = SubResource("StandardMaterial3D_gfrb3")
 mesh = SubResource("BoxMesh_rdfjy")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.609107, 0.793088, 0, -0.793088, 0.609107, 0, 22.5658, 29.0653)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.760871, 0.415021, 0.498832, -0.648904, 0.486632, 0.584904, 0, -0.76873, 0.639573, 4.91211, 8.43022, 0)
