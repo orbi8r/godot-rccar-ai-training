@@ -2,6 +2,7 @@ extends Node3D
 
 @onready var rc_car = $rc_car
 @onready var finish_point = $finish_point
+@onready var ai_controller_3d = $AIController3D
 
 func reset():
 	rc_car.position = Vector3(-20,0,-20)
@@ -20,20 +21,25 @@ func _process(_delta):
 
 
 func _on_finish_point_body_entered(_body):
+	ai_controller_3d.reward += 10.0 #positive reward for finish line
 	reset()
 
 
 func _on_wall_3_body_entered(_body):
+	ai_controller_3d.reward -= 1.0
 	reset()
 
 
 func _on_wall_4_body_entered(_body):
+	ai_controller_3d.reward -= 1.0
 	reset()
 
 
 func _on_wall_2_body_entered(_body):
+	ai_controller_3d.reward -= 1.0
 	reset()
 
 
 func _on_wall_body_entered(_body):
+	ai_controller_3d.reward -= 1.0
 	reset()

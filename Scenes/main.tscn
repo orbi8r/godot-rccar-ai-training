@@ -1,9 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://c8bq2hbp8nub"]
+[gd_scene load_steps=14 format=3 uid="uid://c8bq2hbp8nub"]
 
 [ext_resource type="Script" path="res://godot-rccar-ai-training/Scripts/main.gd" id="1_2h4i0"]
 [ext_resource type="Texture2D" uid="uid://dq1mysfrrqopj" path="res://godot-rccar-ai-training/Assets/Kenny Prototype Texture/Orange/texture_02.png" id="1_7aou6"]
 [ext_resource type="PackedScene" uid="uid://c3aynekcf63lg" path="res://godot-rccar-ai-training/Scenes/rc_car.tscn" id="2_bcp4r"]
 [ext_resource type="Texture2D" uid="uid://br55m4vclqehj" path="res://godot-rccar-ai-training/Assets/Kenny Prototype Texture/Green/texture_08.png" id="3_ie2mf"]
+[ext_resource type="Script" path="res://godot-rccar-ai-training/Scripts/AIController3D.gd" id="5_xah1q"]
+[ext_resource type="Script" path="res://addons/godot_rl_agents/sync.gd" id="6_nkbiy"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pyh6s"]
 
@@ -27,7 +29,6 @@ size = Vector3(1, 1, 50)
 script = ExtResource("1_2h4i0")
 
 [node name="rc_car" parent="." instance=ExtResource("2_bcp4r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="finish_point" type="Area3D" parent="."]
 
@@ -83,6 +84,13 @@ shape = SubResource("BoxShape3D_j34jd")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Wall"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0, 0)
 shape = SubResource("BoxShape3D_j34jd")
+
+[node name="AIController3D" type="Node3D" parent="."]
+script = ExtResource("5_xah1q")
+
+[node name="Sync" type="Node" parent="."]
+script = ExtResource("6_nkbiy")
+speed_up = 10.0
 
 [connection signal="body_entered" from="finish_point" to="." method="_on_finish_point_body_entered"]
 [connection signal="body_entered" from="Map/Wall3" to="." method="_on_wall_3_body_entered"]
