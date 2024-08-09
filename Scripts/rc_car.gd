@@ -32,6 +32,10 @@ func _process(delta):
 		if Lpower >= 0:
 			Lpower = 0
 			Ldir = -1
+			
+	elif Input.is_action_just_released("Lforward") or Input.is_action_just_released("Lbackward"):
+		Lpower = 0
+		Ldir = 0
 	
 	#steadily increases power
 	if Lpower < 1 and Lpower > -1:
@@ -53,6 +57,10 @@ func _process(delta):
 		if Rpower >= 0:
 			Rpower = 0
 			Rdir = -1
+			
+	elif Input.is_action_just_released("Rforward") or Input.is_action_just_released("Rbackward"):
+		Rpower = 0
+		Rdir = 0
 	
 	#steadily increases power
 	if Rpower < 1 and Rpower > -1:
@@ -62,4 +70,4 @@ func _process(delta):
 	b_rwheel.engine_force = f_rwheel.engine_force
 	
 #endregion
-	
+

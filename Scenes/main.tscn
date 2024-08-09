@@ -1,7 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://c8bq2hbp8nub"]
+[gd_scene load_steps=12 format=3 uid="uid://c8bq2hbp8nub"]
 
+[ext_resource type="Script" path="res://godot-rccar-ai-training/Scripts/main.gd" id="1_2h4i0"]
 [ext_resource type="Texture2D" uid="uid://dq1mysfrrqopj" path="res://godot-rccar-ai-training/Assets/Kenny Prototype Texture/Orange/texture_02.png" id="1_7aou6"]
 [ext_resource type="PackedScene" uid="uid://c3aynekcf63lg" path="res://godot-rccar-ai-training/Scenes/rc_car.tscn" id="2_bcp4r"]
+[ext_resource type="Texture2D" uid="uid://br55m4vclqehj" path="res://godot-rccar-ai-training/Assets/Kenny Prototype Texture/Green/texture_08.png" id="3_ie2mf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pyh6s"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_21bms"]
+albedo_texture = ExtResource("3_ie2mf")
+
+[sub_resource type="BoxMesh" id="BoxMesh_hv7l6"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_10mx4"]
 
@@ -11,24 +20,72 @@ albedo_texture = ExtResource("1_7aou6")
 [sub_resource type="BoxMesh" id="BoxMesh_rdfjy"]
 size = Vector3(50, 0.1, 50)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_j34jd"]
+size = Vector3(1, 1, 50)
+
 [node name="Main" type="Node3D"]
+script = ExtResource("1_2h4i0")
 
 [node name="rc_car" parent="." instance=ExtResource("2_bcp4r")]
-transform = Transform3D(0.765977, 0, -0.642868, 0, 1, 0, 0.642868, 0, 0.765977, 0.314588, 3.6543, 0.874213)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="Floor" type="StaticBody3D" parent="."]
+[node name="finish_point" type="Area3D" parent="."]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="finish_point"]
+shape = SubResource("BoxShape3D_pyh6s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="finish_point"]
+material_override = SubResource("StandardMaterial3D_21bms")
+mesh = SubResource("BoxMesh_hv7l6")
+
+[node name="Map" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Map"]
+transform = Transform3D(0.760871, 0.415021, 0.498832, -0.648904, 0.486632, 0.584904, 0, -0.76873, 0.639573, 4.91211, 8.43022, -1.90735e-06)
+
+[node name="Camera3D" type="Camera3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 0.609107, 0.793088, 0, -0.793088, 0.609107, 0, 22.5658, 29.0653)
+
+[node name="Floor" type="StaticBody3D" parent="Map"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Floor"]
 transform = Transform3D(50, 0, 0, 0, 0.1, 0, 0, 0, 50, 0, -0.1, 0)
 shape = SubResource("BoxShape3D_10mx4")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Map/Floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
 material_override = SubResource("StandardMaterial3D_gfrb3")
 mesh = SubResource("BoxMesh_rdfjy")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.609107, 0.793088, 0, -0.793088, 0.609107, 0, 22.5658, 29.0653)
+[node name="Wall3" type="Area3D" parent="Map"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.760871, 0.415021, 0.498832, -0.648904, 0.486632, 0.584904, 0, -0.76873, 0.639573, 4.91211, 8.43022, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Wall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0, 0)
+shape = SubResource("BoxShape3D_j34jd")
+
+[node name="Wall4" type="Area3D" parent="Map"]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Wall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0, 0)
+shape = SubResource("BoxShape3D_j34jd")
+
+[node name="Wall2" type="Area3D" parent="Map"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Wall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0, 0)
+shape = SubResource("BoxShape3D_j34jd")
+
+[node name="Wall" type="Area3D" parent="Map"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0, 0)
+shape = SubResource("BoxShape3D_j34jd")
+
+[connection signal="body_entered" from="finish_point" to="." method="_on_finish_point_body_entered"]
+[connection signal="body_entered" from="Map/Wall3" to="." method="_on_wall_3_body_entered"]
+[connection signal="body_entered" from="Map/Wall4" to="." method="_on_wall_4_body_entered"]
+[connection signal="body_entered" from="Map/Wall2" to="." method="_on_wall_2_body_entered"]
+[connection signal="body_entered" from="Map/Wall" to="." method="_on_wall_body_entered"]
