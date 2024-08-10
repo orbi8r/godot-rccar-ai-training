@@ -8,10 +8,12 @@ var controls = [0,0,0,0]
 
 func get_obs() -> Dictionary:
 	var obs := [
-		rc_car.position.x,
-		rc_car.position.z,
-		finish_point.position.x,
-		finish_point.position.z
+		finish_point.position.x - rc_car.position.x,
+		finish_point.position.z - rc_car.position.z,
+		rc_car.rotation.y,
+		rc_car.linear_velocity.x,
+		rc_car.linear_velocity.z,
+		rc_car.position.x**2 + rc_car.position.z**2
 	]
 	return {"obs": obs}
 
