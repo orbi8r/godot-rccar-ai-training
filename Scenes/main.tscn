@@ -10,14 +10,14 @@
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_83d5o"]
 height = 1.0
-radius = 2.0
+radius = 8.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_21bms"]
 albedo_texture = ExtResource("3_ie2mf")
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_anhk8"]
-top_radius = 2.0
-bottom_radius = 2.0
+top_radius = 8.0
+bottom_radius = 8.0
 height = 1.0
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_3ookk"]
@@ -32,14 +32,14 @@ bottom_radius = 50.0
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_4uwi4"]
 height = 1.0
-radius = 65.0
+radius = 70.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e1mnn"]
 albedo_texture = ExtResource("6_m2qmj")
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_8vd4c"]
-top_radius = 65.0
-bottom_radius = 65.0
+top_radius = 70.0
+bottom_radius = 70.0
 height = 1.0
 
 [node name="Main" type="Node3D"]
@@ -48,6 +48,7 @@ script = ExtResource("1_2h4i0")
 [node name="rc_car" parent="." instance=ExtResource("2_bcp4r")]
 
 [node name="finish_point" type="Area3D" parent="."]
+collision_layer = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="finish_point"]
 shape = SubResource("CylinderShape3D_83d5o")
@@ -73,12 +74,6 @@ material_override = SubResource("StandardMaterial3D_53o2y")
 mesh = SubResource("CylinderMesh_11a7m")
 skeleton = NodePath("../CollisionShape3D")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Map"]
-transform = Transform3D(0.965926, -7.5785e-10, 0.258819, -0.258819, -2.82834e-09, 0.965926, 0, -1, -2.92811e-09, 19, 43, 0)
-
-[node name="Camera3D" type="Camera3D" parent="Map"]
-transform = Transform3D(1, 0, 0, 0, 0.381216, 0.924486, 0, -0.924486, 0.381216, 1.96656, 56.444, 34.4057)
-
 [node name="Boundary" type="Area3D" parent="Map"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Boundary"]
@@ -90,9 +85,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 material_override = SubResource("StandardMaterial3D_e1mnn")
 mesh = SubResource("CylinderMesh_8vd4c")
 
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 72.1286, 0)
+
 [node name="Sync" type="Node" parent="."]
 script = ExtResource("7_s7o45")
-speed_up = 10.0
+speed_up = 5000.0
 
 [connection signal="body_entered" from="finish_point" to="." method="_on_finish_point_body_entered"]
 [connection signal="body_entered" from="Map/Boundary" to="." method="_on_area_3d_body_entered"]

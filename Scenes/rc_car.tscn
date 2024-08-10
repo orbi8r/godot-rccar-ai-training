@@ -18,6 +18,7 @@ script = ExtResource("1_ycohr")
 [node name="FLwheel" type="VehicleWheel3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.545, 0.285, 0.63)
 use_as_traction = true
+use_as_steering = true
 wheel_radius = 0.3
 
 [node name="wheel-racing2" parent="FLwheel" instance=ExtResource("2_d4rdk")]
@@ -25,6 +26,7 @@ wheel_radius = 0.3
 [node name="FRwheel" type="VehicleWheel3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.545, 0.285, 0.63)
 use_as_traction = true
+use_as_steering = true
 wheel_radius = 0.3
 
 [node name="wheel-racing2" parent="FRwheel" instance=ExtResource("2_d4rdk")]
