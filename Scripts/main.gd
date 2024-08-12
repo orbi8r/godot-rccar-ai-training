@@ -21,7 +21,7 @@ func _process(_delta):
 
 
 func _on_finish_point_body_entered(_body):
-	ai_controller_3d.reward += 10.0 #positive reward for finish line
+	ai_controller_3d.reward += 0.5 #positive reward for finish line
 	reset()
 
 
